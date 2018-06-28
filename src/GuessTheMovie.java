@@ -6,26 +6,33 @@ import java.io.File;
 public class GuessTheMovie {
     public static void main(String[] args) throws Exception {
         try {
-            File file = new File("movies.txt");
-            Scanner scanner = new Scanner(file);
+            File file = new File("movies.txt"); // create a new File object, and pass "movies.txt" into its constructor
+            Scanner scanner = new Scanner(file); // scanner scans our file
 
             int lines = 0;
             String mv = "";
+            // count the number of lines in the file
             while (scanner.hasNextLine()) {
                 mv = scanner.nextLine();
                 lines++;
             }
+            
+            // generate a random number (line) that is less than or equal to the number of lines in the file
             int line = (int) (Math.random() * lines) + 1;
             String movie = "";
             int i = 0;
             Scanner scanner1 = new Scanner(file);
+            // assign the movie variable a random movie title (that lies on line)
             while (scanner1.hasNextLine()) {
                 movie = scanner1.nextLine();
                 i++;
                 if (i == line)
                     break;
             }
+            
+            // convert String into a char array, so that we can compare individual characters
             char[] movieC = movie.toCharArray();
+            // generate blanks representing letters of the movie, or a space if the movie's name consists of several words
             char[] code = new char[movie.length()];
             for (int j = 0; j < movie.length(); j++) {
                 if (movieC[j] == ' ')
@@ -33,7 +40,8 @@ public class GuessTheMovie {
                 else
                     code[j] = '_';
             }
-            int wrong = 0;
+            
+            int wrong = 0; // initially the number of wrong guesses is zero
             while (true) {
                 System.out.print("You are guessing: ");
                 System.out.println(code);
