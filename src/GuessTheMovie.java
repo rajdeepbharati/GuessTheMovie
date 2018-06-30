@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.io.File;
 
 public class GuessTheMovie {
+    
+    // main method will throw FileNotFoundException if the movies.txt file is not found
     public static void main(String[] args) throws Exception {
         try {
             File file = new File("movies.txt"); // create a new File object, and pass "movies.txt" into its constructor
@@ -57,13 +59,19 @@ public class GuessTheMovie {
                         guessValue = true;
                     }
                 }
+                
+                // check for wrong guess (letter)
                 if (!guessValue)
-                    wrong++;
+                    wrong++; // increment count of wrong guesses
+                
+                // maximum 10 wrong guesses are allowed
                 if (wrong >= 10) {
                     System.out.println("The movie was: " + movie);
                     System.out.println("Sorry, You Lose!!!");
                     break;
                 }
+                
+                // check if the strings match
                 if (Arrays.equals(code, movieC)) {
                     System.out.println("You guessed it right: " + movie);
                     System.out.println("You Win!!!");
